@@ -55,6 +55,7 @@ def lexer():
             list.append(listPolluted[i])
 
     for j in list:  #adiciona os lexemas ao dicionário
+        preLexer(j)['width'] = len(preLexer(j)) #mostra o tamanho dos lexemas
         preLexemes.append(preLexer(j))
 
     print(preLexemes, '\n')
