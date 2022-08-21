@@ -14,7 +14,7 @@ def lertxt():
     #parte = caminho1.replace('\\', '\\\\')
     arquivo = input('Qual o nome do seu arquivo? (ex.:test.txt)')
     caminho2 = caminho1 + "\\" + arquivo
-    #caminho2 = caminho1 + "/" + arquivo
+    #caminho2 = caminho1 + "/" + arquivo PARA LINUX
     arq = []
     #Aqui o arquivo é chamado
     file = open(caminho2)
@@ -110,6 +110,7 @@ def saveFile():
     path = os.path.join(
         'C:\\Users\\Lgscc\\OneDrive\\Documentos\\Github Desktop\\AnalisadorLexico'
     )
+    #path = os.path.join('./') PARA LUNIX
     #salva o novo arquivo nesse caminho
     saveFile = open(f'{path}\\' + 'outputLexer.txt', 'w')
     for i in range(len(words)):  #escreve as palavras no arquivo
@@ -122,6 +123,7 @@ def exibirTokens():  # Exibe os tokens contidos no arquivo em print's
     path = os.path.join(
         'C:\\Users\\Lgscc\\OneDrive\\Documentos\\Github Desktop\\AnalisadorLexico'
     )  #abre o arquivo
+    #path = os.path.join('./') PARA LUNIX
     output = open(f'{path}\\' + 'outputLexer.txt', 'r')
     lines = output.readlines()  #lê o arquivo
     output.close()
