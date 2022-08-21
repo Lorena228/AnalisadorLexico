@@ -1,4 +1,5 @@
 import os
+import tag
 
 spacingChar = ['\n', '\t', ' ']
 organizationChar = ['[', ']', '{', '}', '(', ')', ';']
@@ -56,10 +57,46 @@ def lexer():
 
     for j in list:  #adiciona os lexemas ao dicionário
         preLexer(j)['width'] = len(preLexer(j)) #mostra o tamanho dos lexemas
+        if preLexer(j)['lexeme']=='if':
+            preLexer(j)['tag']=tag.IF
+        elif preLexer(j)['lexeme']=='else':
+            preLexer(j)['tag'] = tag.ELSE
+        elif preLexer(j)['lexeme']=='false':
+            preLexer(j)['tag'] = tag.FALSE
+        elif preLexer(j)['lexeme'] == 'true':
+            preLexer(j)['tag'] = tag.TRUE
+        elif preLexer(j)['lexeme'] == 'and':
+            preLexer(j)['tag'] = tag.AND
+        elif preLexer(j)['lexeme'] == 'or':
+            preLexer(j)['tag'] == tag.OR
+        elif preLexer(j)['lexeme'] == 'do':
+            preLexer(j)['tag'] == tag.DO
+        elif preLexer(j)['lexeme'] == 'while':
+            preLexer(j)['tag'] == tag.WHILE
+        elif preLexer(j)['lexeme'] == 'float' or preLexer(j)['lexeme'] == 'bool' or preLexer(j)['lexeme'] == 'int':
+            preLexer(j)['tag'] == tag.BASIC
+        #elif preLexer(j)['lexeme'] == 't':
+            #preLexer(j)['tag'] == tag.TEMP
+        elif preLexer(j)['lexeme'] == '!=':
+            preLexer(j)['lexeme']== tag.NO_EQUAL
+        elif preLexer(j)['lexeme'] == 'break':
+            preLexer(j)['lexeme'] == tag.BREAK
+        elif preLexer(j)['lexeme'] == '>=':
+            preLexer(j)['lexeme'] == tag.GREAT_EQUAL
+        #elif preLexer(j)['lexeme'] == '-':
+            #preLexer(j)['lexeme'] == tag.MINUS
+        elif preLexer(j)['lexeme'] == '<=':
+            preLexer(j)['lexeme'] == tag.LOW_EQUAL
+        #elif preLexer(j)['lexeme'] == 'index':
+            #preLexer(j)['lexeme'] == tag.INDEX
+        #elif preLexer(j)['lexeme'] == 'for':
+            #preLexer(j)['tag'] == tag.FOR
         preLexemes.append(preLexer(j))
-
-    print(preLexemes, '\n')
+        print(preLexemes, '\n')
     words = preLexemes
+
+
+
 
 
 #def lerTxt():
