@@ -19,7 +19,7 @@ def lertxt():
     #Aqui o arquivo é chamado
     file = open(caminho2)
     lines = file.readlines()  #Aqui lê o arquivo e guarda na variável
-    for char in spacingChar:
+    for char in spacingChar:  #\n e \t
         for line in lines:
             if line.startswith(char):
                 lines[lines.index(line)] = line.replace(char, '')
@@ -104,8 +104,35 @@ def newTag(token):
     return token  #Token pronto
 
 
+# Parte responsável por salvar os tokens em um arquivo
+def saveFile():
+    global words
+    path = os.path.join(
+        'C:\\Users\\Lgscc\\OneDrive\\Documentos\\Github Desktop\\AnalisadorLexico'
+    )
+    #salva o novo arquivo nesse caminho
+    saveFile = open(f'{path}\\' + 'outputLexer.txt', 'w')
+    for i in range(len(words)):  #escreve as palavras no arquivo
+        saveFile.write(f'Token: {words[i]} \n')
+    saveFile.close()
+    return saveFile.name
+
+
+def exibirTokens():  # Exibe os tokens contidos no arquivo em print's
+    path = os.path.join(
+        'C:\\Users\\Lgscc\\OneDrive\\Documentos\\Github Desktop\\AnalisadorLexico'
+    )  #abre o arquivo
+    output = open(f'{path}\\' + 'outputLexer.txt', 'r')
+    lines = output.readlines()  #lê o arquivo
+    output.close()
+    for line in lines:  #print
+        print(line.strip())
+
+    return f'{path}\\' + 'outputLexer.txt'  #retorna o caminho
+
+
 def lexer():
-    global spacingChar
+    global spacingChar, words
     lex = ''
     list = []
     preLexemes = []
@@ -113,7 +140,7 @@ def lexer():
     arq = lertxt()
 
     for i, char in enumerate(arq):
-        if (char == spacingChar[2]):  #identifica o espaço, formas as palavras
+        if (char == spacingChar[2]):  #identifica o espaço e formas as palavras
             list.append(lex)
             lex = ''
         elif (char
@@ -138,23 +165,9 @@ def lexer():
         token = newTag(token)  #Amazena o token pronto na variável token
         preLexemes.append(token)  #Adiciona o token na lista preLexemes
 
-    for cont in preLexemes:
-        print(cont, '\n')
     words = preLexemes
 
+    salvo = saveFile()
+    caminhoArq = exibirTokens()
 
-# Exemplo de vetor contendo os lexemes
-#lexemes = ["Token: {'tag': '{'}", "Token: {'tag': 257, 'lexeme': 'int', 'width': 4}", "Token: {'tag': 264, 'lexeme': 'i'}"]
-
-# Parte responsável por salvar os tokens em um arquivo
-# path = os.path.join('./')
-# #saveFile = open(f'{path}\\'+'output.txt', 'w')
-# for i in range(len(lexemes)):
-#     saveFile.writelines(lexemes[i]+'\n')
-# saveFile.close()
-
-# # Exibe os tokens contidos no arquivo em print's
-# output = open('output.txt', 'r')
-# lines = output.readlines()
-# for line in lines:
-#     print(line.strip())
+    return caminhoArq
