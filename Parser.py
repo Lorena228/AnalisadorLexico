@@ -11,118 +11,118 @@ def block():
 
 
 def decls():
-    if():
+    if(token == ''):
         match("decls")
         match("decl")
-    elif():
+    elif(token == ''):
         match("∈")
 
 def decl():
     type(id)
 
 def type():
-    if():
+    if(token == ''):
         match("type(Num)")
-    elif():
+    elif(token == ''):
         match("basic")
 
 def stmts():
-    if():
+    if(token == ''):
         stmts()
         stmt()
 
 def stmt():  #PEDIR ORIENTAÇÃO
-    if():
+    if(token == ''):
         match("loc[bool]")
-    elif():
+    elif(token == ''):
         if(bool):
             match("stmt")
         elif():
             match("stmt")
-    elif():
+    elif(token == ''):
         while(bool):
             match("stmt")
-    elif():
+    elif(token == ''):
         match("break")
-    elif():
+    elif(token == ''):
         match("block")
 
 def loc():
-    if():
+    if(token == ''):
         match("loc[bool]")
-    elif():
+    elif(token == ''):
         match("id")
 
 def bool():
-    if():
+    if(token == ''):
         if():
             match("bool")
         if():
             match("join")
-    elif():
+    elif(token == ''):
         match("join")
 
 def join():
-    if():
+    if(token == ''):
         match("join")
         match("equality")
-    elif():
+    elif(token == ''):
         match("equality")
     
 def equality():
-    if():
+    if(token == ''):
         match("equality == rel")
-    elif():
+    elif(token == ''):
         match("equality != rel")
     else:
         match("rel")
 
 def rel():
-    if():
+    if(token == ''):
         match("expr < expr")
-    elif():
+    elif(token == ''):
         match("expr <= expr")
-    elif():
+    elif(token == ''):
         match("expr >= expr")
-    elif():
+    elif(token == ''):
         match("expr > expr")
-    elif():
+    elif(token == ''):
         match("expr")
 
 def expr():
-    if():
+    if(token == ''):
         match("expr + term")
-    elif():
+    elif(token == ''):
         match("expr - term")
-    elif():
+    elif(token == ''):
         match("term")
     
 def term():
-    if():
+    if(token == ''):
         match("term * unary")
-    elif():
+    elif(token == ''):
         match("term / unary")
-    elif():
+    elif(token == ''):
         match("unary")
 
 def unary():
-    if():
+    if(token == ''):
         match("! unary")
-    elif():
+    elif(token == ''):
         match("- unary")
-    elif():
+    elif(token == ''):
         match("factor")
 
 def factor():
-    if():
+    if(token == ''):
         match("(bool)")
-    elif():
+    elif(token == ''):
         match("loc")
-    elif():
+    elif(token == ''):
         match("num")
-    elif():
+    elif(token == ''):
         match("real")
-    elif():
+    elif(token == ''):
         match("true")
-    elif():
+    elif(token == ''):
         match("false")
