@@ -14,7 +14,7 @@ def decls():
     if():
         match("decls")
         match("decl")
-    else:
+    elif():
         match("∈")
 
 def decl():
@@ -23,7 +23,7 @@ def decl():
 def type():
     if():
         match("type(Num)")
-    else:
+    elif():
         match("basic")
 
 def stmts():
@@ -69,4 +69,60 @@ def join():
     elif():
         match("equality")
     
-def equality:
+def equality():
+    if():
+        match("equality == rel")
+    elif():
+        match("equality != rel")
+    else:
+        match("rel")
+
+def rel():
+    if():
+        match("expr < expr")
+    elif():
+        match("expr <= expr")
+    elif():
+        match("expr >= expr")
+    elif():
+        match("expr > expr")
+    elif():
+        match("expr")
+
+def expr():
+    if():
+        match("expr + term")
+    elif():
+        match("expr - term")
+    elif():
+        match("term")
+    
+def term():
+    if():
+        match("term * unary")
+    elif():
+        match("term / unary")
+    elif():
+        match("unary")
+
+def unary():
+    if():
+        match("! unary")
+    elif():
+        match("- unary")
+    elif():
+        match("factor")
+
+def factor():
+    if():
+        match("(bool)")
+    elif():
+        match("loc")
+    elif():
+        match("num")
+    elif():
+        match("real")
+    elif():
+        match("true")
+    elif():
+        match("false")
