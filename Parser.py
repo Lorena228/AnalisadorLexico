@@ -28,20 +28,20 @@ def type():
 
 def stmts():
     if(token == ''):
-        stmts()
-        stmt()
+        match("stmts")
+        match("stmt")
 
-def stmt():  #PEDIR ORIENTAÇÃO
+def stmt():  
     if(token == ''):
         match("loc[bool]")
     elif(token == ''):
         if(bool):
-            match("stmt")
+            stmt()
         elif():
-            match("stmt")
+            stmt()
     elif(token == ''):
         while(bool):
-            match("stmt")
+            stmt()
     elif(token == ''):
         match("break")
     elif(token == ''):
