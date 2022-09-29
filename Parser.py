@@ -1,7 +1,20 @@
 from ast import Num
 from re import match
 
-
+class TokenSymbol:
+    EQ = '='
+    LT = '<'
+    LTE = '<='
+    FIRST_BRACKET = '('
+    LAST_BRACKET = ')'
+    FIRT_CURLY = '{'
+    LAST_CURLY = '}'
+    COMMENT = ';'
+    MULTIPLY = '*'
+    DIV = '/'
+    ADD = '+'
+    MINUS = '-'
+    
 def program():
     match("block")
 
