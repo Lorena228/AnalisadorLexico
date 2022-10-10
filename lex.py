@@ -1,5 +1,6 @@
 import os
 import tag
+import parserSegundo as PS
 
 spacingChar = ['\n', '\t', ' ']
 organizationChar = ['[', ']', '{', '}', '(', ')', ';']
@@ -165,11 +166,6 @@ def lexer():
     for j in list:
         token = preLexer(j)
         token = newTag(token)  #Amazena o token pronto na variável token
-        preLexemes.append(token)  #Adiciona o token na lista preLexemes
+        words.append(token)  #Adiciona o token na lista preLexemes
 
-    words = preLexemes
-
-    salvo = saveFile()
-    caminhoArq = exibirTokens()
-
-    return caminhoArq
+    return words
