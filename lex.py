@@ -1,6 +1,5 @@
 import os
 import tag
-import parserSegundo as PS
 
 spacingChar = ['\n', '\t', ' ']
 organizationChar = ['[', ']', '{', '}', '(', ')', ';']
@@ -11,14 +10,14 @@ words = []
 def lertxt():
     global spacingChar
     #Essa parte é pra informar o caminho do arquivo independente onde esteja
-    caminho1 = input('Onde está o seu arquivo test.txt?')
+    caminho = input('Onde está o seu arquivo? ->')
     #parte = caminho1.replace('\\', '\\\\')
-    arquivo = input('Qual o nome do seu arquivo? (ex.:test.txt)')
-    caminho2 = caminho1 + "\\" + arquivo
-    #caminho2 = caminho1 + "/" + arquivo PARA LINUX
-    arq = []
+    arquivo = input('Qual o nome do seu arquivo? (ex.:test.txt) ->')
+    caminho_do_arquivo = caminho + "\\" + arquivo
+    #caminho_do_arquivo = caminho + "/" + arquivo #PARA LINUX
+    arq = [[]]
     #Aqui o arquivo é chamado
-    file = open(caminho2)
+    file = open(caminho_do_arquivo)
     lines = file.readlines()  #Aqui lê o arquivo e guarda na variável
     for char in spacingChar:  #\n e \t
         for line in lines:
@@ -27,9 +26,12 @@ def lertxt():
             if line.endswith(char):
                 lines[lines.index(line)] = line.replace(char, '')
 
+    num_line = 0
     for line in lines:
         for character in line:
-            arq.append(character)
+            arq[num_line].append(character)
+        arq.append([])
+        num_line += 1
 
     return arq
 
@@ -85,14 +87,10 @@ def newTag(token):
             token['tag'] = tag.GREAT_EQUAL
         elif token['lexeme'] == '<=':
             token['tag'] = tag.LOW_EQUAL
-        elif token['lexeme'] == '=' or token['lexeme'] == '>' or token[
-                'lexeme'] == '<':  #Esses símbolos são a própria tag
+        elif token['lexeme'] == '=' or token['lexeme'] == '>' or token['lexeme'] == '<':  #Esses símbolos são a própria tag
             token['tag'] = token['lexeme']
             token.pop('lexeme')
-        elif token['lexeme'] == '[' or token['lexeme'] == ']' or token[
-                'lexeme'] == '{' or token['lexeme'] == '}' or token[
-                    'lexeme'] == '(' or token['lexeme'] == ')' or token[
-                        'lexeme'] == ';':
+        elif token['lexeme'] == '[' or token['lexeme'] == ']' or token['lexeme'] == '{' or token['lexeme'] == '}' or token['lexeme'] == '(' or token['lexeme'] == ')' or token['lexeme'] == ';':
             token['tag'] = token['lexeme']
             token.pop('lexeme')
         else:
@@ -138,34 +136,49 @@ def lexer():
     global spacingChar, words
     lex = ''
     list = []
-    preLexemes = []
 
     arq = lertxt()
 
-    for i, char in enumerate(arq):
-        if (char == spacingChar[2]):  #identifica o espaço e formas as palavras
-            list.append(lex)
-            lex = ''
-        elif (char
-              in organizationChar):  #identifica os caracteres de organização
-            list.append(lex)
-            list.append(char)
-            lex = ''
-        else:
-            lex = lex + char
+    num_line = 0
+    for line in arq:
+        num_line += 1
+        list.append(f"'{num_line}'")
+        for i, char in enumerate(line):
+            if (char == spacingChar[2]):  #identifica o espaço e formas as palavras
+                list.append(lex)
+                lex = ''
+            elif (char in organizationChar):  #identifica os caracteres de organização
+                list.append(lex)
+                list.append(char)
+                lex = ''
+            else:
+                lex = lex + char
 
     roda = True
 
-    while (roda):  #elima os espaços em branco
+    while (roda):  #elimina os espaços em branco
         if ('' in list):
             index = list.index('')
             list.pop(index)
         else:
             roda = False
 
+    
+    linha = 1
     for j in list:
+        validador = 0
+        for value in range(linha,num_line):
+            if j == f"'{value}'":
+                linha = value
+                validador = 1
+                break
+        if validador == 1:
+            continue
         token = preLexer(j)
         token = newTag(token)  #Amazena o token pronto na variável token
+        token['line'] = linha
         words.append(token)  #Adiciona o token na lista preLexemes
+
+    words.pop()
 
     return words
