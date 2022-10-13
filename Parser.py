@@ -139,3 +139,9 @@ def factor():
         match("true")
     elif(token == ''):
         match("false")
+
+#def ErrorSyntax(line, error):
+#   if line =! error:
+#        continue
+ #   elif:
+  #   printf(line, "EOL ERROR SYNTAX"
